@@ -1,24 +1,41 @@
+# -*- coding: utf-8 -*-
+
 import unittest2 as unittest
 
-from Products.CMFCore.utils import getToolByName
+from plone.app.testing import TEST_USER_ID
+from plone.app.testing import TEST_USER_NAME
+from plone.app.testing import login
+from plone.app.testing import setRoles
 
+from vindula.services.config import PROJECTNAME
 from vindula.services.testing import INTEGRATION_TESTING
 
 
-class TestExample(unittest.TestCase):
+class TestInstall(unittest.TestCase):
+    """ensure product is properly installed"""
 
     layer = INTEGRATION_TESTING
 
     def setUp(self):
-        self.app = self.layer['app']
         self.portal = self.layer['portal']
-        self.qi_tool = getToolByName(self.portal, 'portal_quickinstaller')
+        self.qi = getattr(self.portal, 'portal_quickinstaller')
 
-    def test_product_is_installed(self):
-        """ Validate that our products GS profile has been run and the product
-            installed
-        """
-        pid = 'vindula.services'
-        installed = [p['id'] for p in self.qi_tool.listInstalledProducts()]
-        self.assertTrue(pid in installed,
-                        'package appears not to have been installed')
+    def test_installed(self):
+        self.failUnless(self.qi.isProductInstalled(PROJECTNAME),
+                        '%s not installed' % PROJECTNAME)
+
+
+class TestUninstall(unittest.TestCase):
+    """ensure product is properly uninstalled"""
+
+    layer = INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        login(self.portal, TEST_USER_NAME)
+        self.qi = getattr(self.portal, 'portal_quickinstaller')
+        self.qi.uninstallProducts(products=[PROJECTNAME])
+
+    def test_uninstalled(self):
+        self.failIf(self.qi.isProductInstalled(PROJECTNAME))

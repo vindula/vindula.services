@@ -1,4 +1,4 @@
-from  vindula.services.testing import FUNCTIONAL_TESTING
+from vindula.services.testing import FUNCTIONAL_TESTING
 from plone.testing import layered
 import robotsuite
 import unittest
