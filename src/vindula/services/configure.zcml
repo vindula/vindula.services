@@ -16,6 +16,13 @@
       description="Installs the vindula.services package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-  <!-- -*- extra stuff goes here -*- -->
+
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="vindula.services uninstall"
+      directory="profiles/uninstall"
+      description="Uninstall profile for the vindula.services package"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
 
 </configure>
