@@ -47,10 +47,10 @@ quality-assurance: python-validation css-validation js-validation
 	@echo Quality assurance
 	./coverage.sh $(minimum_coverage)
 
-#install:
-#	mkdir -p buildout-cache/downloads
-#	python bootstrap.py -c travis.cfg
-#	bin/buildout -c travis.cfg $(options)
+install:
+	mkdir -p buildout-cache/downloads
+	python bootstrap.py -c travis.cfg
+	bin/buildout -c travis.cfg $(options)
 
 tests:
 	bin/pocompile $(src)
