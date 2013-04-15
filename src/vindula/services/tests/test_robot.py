@@ -1,7 +1,7 @@
 from vindula.services.testing import FUNCTIONAL_TESTING
 from plone.testing import layered
 import robotsuite
-import unittest
+import unittest2 as unittest
 
 
 def test_suite():

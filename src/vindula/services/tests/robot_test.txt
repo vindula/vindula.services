@@ -1,22 +1,39 @@
 *** Settings ***
 
-Library  Selenium2Library  timeout=10  implicit_wait=0.5
+Library  Selenium2Library  timeout=5 seconds  implicit_wait=3 seconds
+Resource  keywords.txt
+Variables  plone/app/testing/interfaces.py
 
-Suite Setup  Start browser
-Suite Teardown  Close All Browsers
+Suite Setup  Start Browser and Log In
+Suite Teardown  Close Browser
 
 *** Variables ***
 
-${BROWSER} =  firefox
+${TITLE_SELECTOR} =  input#form-widgets-IDublinCore-title
 
 *** Test Cases ***
 
-Plone site
-    [Tags]  start
-    Go to  http://localhost:55001/plone/
-    Page should contain  Plone site
+Test CRUD
+    Create ServicosFolder
 
 *** Keywords ***
 
-Start browser
-    Open browser  http://localhost:55001/plone/  browser=${BROWSER}
+Log In As Site Owner
+    Go to  ${PLONE_URL}/login_form
+    Page should contain element  __ac_name
+    Input text  __ac_name  ${SITE_OWNER_NAME}
+    Input text  __ac_password  ${SITE_OWNER_PASSWORD}
+    Click Button  Log in
+    Go to  ${PLONE_URL}
+
+Start Browser and Log In
+    Open Browser  ${PLONE_URL}  browser=${BROWSER}
+    Log In As Site Owner
+
+Create ServicosFolder
+    Open Add New Menu
+    Click Link  Services
+    Page Should Contain  Add Services
+    Input Text  css=${TITLE_SELECTOR}  Lorem ipsum
+    Click Button Save
+    Page Should Contain  Changes saved.

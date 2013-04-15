@@ -16,18 +16,7 @@ class Fixture(PloneSandboxLayer):
     def setUpZope(self, app, configurationContext):
         # Load ZCML
         import vindula.services
-        xmlconfig.file(
-            'configure.zcml',
-            vindula.services,
-            context=configurationContext
-        )
-
-        # Install products that use an old-style initialize() function
-        #z2.installProduct(app, 'Products.PloneFormGen')
-
-#    def tearDownZope(self, app):
-#        # Uninstall products installed above
-#        z2.uninstallProduct(app, 'Products.PloneFormGen')
+        self.loadZCML(package=vindula.services)
 
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'vindula.services:default')

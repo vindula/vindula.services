@@ -9,6 +9,8 @@
 
   <includeDependencies package="." />
 
+  <include package=".content" />
+
   <genericsetup:registerProfile
       name="default"
       title="vindula.services"

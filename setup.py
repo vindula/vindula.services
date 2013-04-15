@@ -42,13 +42,19 @@ setup(name='vindula.services',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'vindula.content',
       ],
-      extras_require={'test': ['plone.app.testing[robot]>=4.2.2']},
+      extras_require={
+          'test': [
+              'plone.app.testing',
+              'ftw.testing',
+              'robotsuite',
+              'robotframework-selenium2library',
+          ],
+      },
       entry_points="""
       # -*- Entry points: -*-
       [z3c.autoinclude.plugin]
       target = plone
       """,
-      setup_requires=["PasteScript"],
-      paster_plugins=["templer.localcommands"],
       )

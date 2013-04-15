@@ -22,7 +22,7 @@ class ContentTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.portal.invokeFactory('ServicoFolder', 'test-folder')
+        self.portal.invokeFactory('ServicosFolder', 'test-folder')
         setRoles(self.portal, TEST_USER_ID, ['Member'])
         self.folder = self.portal['test-folder']
 
