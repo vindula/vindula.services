@@ -35,7 +35,7 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
     ),
 
     atapi.BooleanField(
-        name='activ_portlteRight',
+        name='activ_portletRight',
         default=True,
         widget=atapi.BooleanWidget(
             label=_(u'Portlet Direita'),

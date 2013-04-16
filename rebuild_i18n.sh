@@ -1,7 +1,7 @@
 #! /bin/sh
 
-I18NDOMAIN="sebrae.sgc.policy"
-BASE_DIRECTORY="src/sebrae/sgc/policy"
+I18NDOMAIN="vindula.services"
+BASE_DIRECTORY="src/vindula/services"
 
 # Synchronise the templates and scripts with the .pot.
 i18ndude rebuild-pot --pot ${BASE_DIRECTORY}/locales/${I18NDOMAIN}.pot \

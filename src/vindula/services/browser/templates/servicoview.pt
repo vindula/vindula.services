@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="pt-br"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="vindula.services">
+    <head>
+        <metal:block fill-slot="top_slot">
+            <tal:cond tal:condition="not: context/getActiv_portletLeft">
+                <tal:dummy tal:define="disable_column_one python:request.set('disable_plone.leftcolumn',1);"/>
+            </tal:cond>
+            <tal:cond tal:condition="not: context/getActiv_portletRight">
+                <tal:dummy tal:define="disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
+            </tal:cond>
+        </metal:block>
+    </head>
+    <body>
+        <metal:main fill-slot="content-core"
+                     tal:define="imersao context/getImersao" >
+            <div tal:condition="not: imersao">
+
+
+            </div>
+            <div tal:condition="imersao">
+
+            </div>
+        </metal:main>
+    </body>
+</html>
+
+

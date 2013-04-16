@@ -10,7 +10,7 @@
  <property name="product">vindula.services</property>
  <property name="factory">addServico</property>
  <property name="immediate_view">view</property>
- <property name="global_allow">True</property>
+ <property name="global_allow">False</property>
  <property name="filter_content_types">False</property>
  <property name="allowed_content_types">
  </property>
@@ -23,7 +23,7 @@
  <alias from="sharing" to="@@sharing"/>
  <alias from="view" to="(selected layout)"/>
  <action title="View" action_id="view" category="object" condition_expr=""
-    url_expr="string:${folder_url}/" visible="True"
+    url_expr="string:${object_url}/" visible="True"
     i18n:attributes="title">
   <permission value="View"/>
  </action>
@@ -31,11 +31,5 @@
     url_expr="string:${object_url}/edit" visible="True"
     i18n:attributes="title">
   <permission value="Modify portal content"/>
- </action>
- <action title="Folder Listing" action_id="folderlisting" category="folder"
-    condition_expr="object/isPrincipiaFolderish"
-    url_expr="string:${folder_url}/view" visible="False"
-    i18n:attributes="title">
-  <permission value="View"/>
  </action>
 </object>
