@@ -8,8 +8,6 @@ from zope.interface import implements
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import schemata
 
-from plone.app.folder.folder import ATFolder, ATFolderSchema
-
 from vindula.content.content.vindulanews import VindulaNews, VindulaNews_schema
 
 from vindula.services import MessageFactory as _
@@ -18,10 +16,10 @@ from vindula.services.interfaces import IServico
 
 ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
 
-    atapi.LinesField('links',
-        widget=atapi.LinesWidget(
-            label=_(u'Links'),
-            description=_(u'Informe o(s) link(s) para o serviço. Um por linha.')
+    atapi.StringField('link',
+        widget=atapi.StringWidget(
+            label=_(u'Link'),
+            description=_(u'Informe o link para o serviço. Um por linha.')
         ),
         required=False,
     ),

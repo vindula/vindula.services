@@ -16,15 +16,90 @@
         </metal:block>
     </head>
     <body>
+        <metal:block fill-slot="content-description">
+            <!-- Remoção da macro description padrão do plone-->
+            <span> </span>
+        </metal:block>
         <metal:main fill-slot="content-core"
                      tal:define="imersao context/getImersao" >
+            <!-- Data -->
+            <div>
+                <tal:cond condition="context/active_date">
+                    <div class="info_topoBoxTipo">
+                        <div class="info_data" tal:condition="context/effective_date|nothing">
+                            <h4 tal:content="python: context.effective_date.strftime('%d/%m/%Y / %H:%M')"></h4>
+                        </div>
+                        <div class="visualClear"></div>
+                    </div>
+                </tal:cond>
+                <!--div class="indicacao_comentario" tal:condition="python: contcomments!= 0">
+                    <h4 tal:content="string:Comentários (${contcomments})"></h4>
+                </div-->
+                <div class="visualClear"></div>
+            </div>
             <div tal:condition="not: imersao">
+                <div class="titulo_info">
+                    <h2 tal:content="context/Title"></h2>
+                    <div class="descricao_titulo">
+                        <tal:cond condition="context/active_author">
+                            <h4 tal:content="string: Autor: ${view/authorname|nothing}">Author</h4>
+                        </tal:cond>
+                        <p tal:content="context/Description"></p>
+                    </div>
+                </div>
+                <a href=""
+                   title=""
+                   target="_blank"
+                   tal:attributes="href context/getLink;
+                                   title context/Title">
+                    <p>Link para o servi&ccedil;o</p>
+                </a>
 
+
+                <tal:cont condition="view/check_share|nothing">
+                    <tal:cont condition="context/activ_share|nothing">
+                        <div metal:use-macro="context/vindula-content-share/macros/share" />
+                    </tal:cont>
+                </tal:cont>
+
+                <div>
+                    <tal:condition condition="context/getActiv_image">
+                        <div id="newsImageContainer" tal:condition="context/getImageRelac">
+                            <div id="parent-fieldname-image">
+                                <div class="bk_imagem">
+                                    <a tal:attributes="href python: context.getImageRelac().absolute_url() +'/image_view_fullscreen'">
+                                        <img tal:attributes="src python: context.getImageRelac().absolute_url()+'/image_mini';
+    														     alt context/imageCaption; title context/imageCaption;">
+                                    </a>
+                                    <p class="discreet img_legenda" tal:condition="context/imageCaption">
+                                        <span id="parent-fieldname-imageCaption" tal:content="context/imageCaption"></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </tal:condition>
+
+                    <div class="descricao_destaque texto_pagina" tal:content="structure context/getText|nothing">Text</div>
+                    <div class="visualClear"></div>
+                </div>
 
             </div>
             <div tal:condition="imersao">
-
+                <iframe name="service"
+                        id="service"
+                        marginwidth="0"
+                        marginheight="0"
+                        width="100%"
+                        height="600px"
+                        frameborder="0"
+                        src="link"
+                        tal:attributes="src context/getLink"></iframe>
             </div>
+            <tal:cont condition="context/activ_share_footer|nothing">
+                <tal:cont condition="context/activ_share_footer|nothing">
+                    <div metal:use-macro="context/vindula-content-share/macros/share" />
+                </tal:cont>
+            </tal:cont>
         </metal:main>
     </body>
 </html>
