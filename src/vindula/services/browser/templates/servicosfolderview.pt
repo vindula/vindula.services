@@ -7,15 +7,13 @@
       i18n:domain="vindula.services">
 
     <head>
-
     </head>
 
     <body>
         <metal:main fill-slot="content-core">
-
             <div class="conteiner" id="Servico">
               <tal:def define="portal_type python: ('Servico',);">
-                  <metal:block metal:use-macro="context/macro-busiest-content/macros/view" />
+                  <metal:block metal:use-macro="context/macro_more_access_content/macros/view" />
 
                   <hr/><br/><br/>
 
@@ -29,7 +27,6 @@
 
               </tal:def>
             </div>
-
         </metal:main>
     </body>
 </html>
