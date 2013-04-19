@@ -8,10 +8,13 @@
     <dd class="portletItem">
         <div id="_PortletDestaque">
 
-            <tal:rep repeat="item view/getDestaques">
-                <p tal:content= "item/Title"></p>
-            </tal:rep>
-
+            <ul>
+                <tal:rep repeat="item view/getDestaques">
+                    <li><a tal:attributes="href item/absolute_url"
+                           tal:content="item/Title">
+                    </a></li>
+                </tal:rep>
+            </ul>
 
         </div>
 	</dd>

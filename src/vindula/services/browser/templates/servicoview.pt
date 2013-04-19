@@ -20,8 +20,12 @@
             <!-- Remoção da macro description padrão do plone-->
             <span> </span>
         </metal:block>
+
         <metal:main fill-slot="content-core"
-                     tal:define="imersao context/getImersao" >
+                     tal:define="imersao context/getImersao;
+                                 member context/@@plone_portal_state/member;
+                                 session request/SESSION;
+                                 parametri python: context.getParametri() and '?username=%s&token=%s'%(member.getUserName(),session.get('user_token')) or '';">
             <!-- Data -->
             <div>
                 <tal:cond condition="context/active_date">
@@ -38,31 +42,29 @@
                 <div class="visualClear"></div>
             </div>
 
+            <div tal:condition="context/getStructures">
+                <h3>Unidade</h3>
+
+                <span tal:content="python: context.getStructures().Title()"></span>
+                <br />
+
+            </div>
+            <br/>
             <!-- Social Macros -->
             <div>
                 <div metal:use-macro="context/macro-comboStandard-content/macros/view" />
                 <div metal:use-macro="context/macro-rating-content/macros/view" />
 
             </div>
-
+            <br/>
 
             <div tal:condition="not: imersao">
-                <div class="titulo_info">
-                    <h2 tal:content="context/Title"></h2>
+                <!--div class="titulo_info">
                     <div class="descricao_titulo">
-                        <tal:cond condition="context/active_author">
-                            <h4 tal:content="string: Autor: ${view/authorname|nothing}">Author</h4>
-                        </tal:cond>
                         <p tal:content="context/Description"></p>
                     </div>
-                </div>
-                <a href=""
-                   title=""
-                   target="_blank"
-                   tal:attributes="href context/getLink;
-                                   title context/Title">
-                    <p>Link para o servi&ccedil;o</p>
-                </a>
+                </div-->
+
 
 
                 <tal:cont condition="view/check_share|nothing">
@@ -71,8 +73,10 @@
                     </tal:cont>
                 </tal:cont>
 
+
                 <div>
                     <tal:condition condition="context/getActiv_image">
+
                         <div id="newsImageContainer" tal:condition="context/getImageRelac">
                             <div id="parent-fieldname-image">
                                 <div class="bk_imagem">
@@ -88,12 +92,24 @@
                         </div>
                     </tal:condition>
 
-                    <div class="descricao_destaque texto_pagina" tal:content="structure context/getText|nothing">Text</div>
+                    <h3>Descrição</h3>
+                    <div class="descricao_destaque texto_pagina" tal:content="context/Description|nothing">Descrição</div>
                     <div class="visualClear"></div>
                 </div>
 
+                <div>
+                    <h3>Detalhes</h3>
+                    <div class="descricao_destaque texto_pagina" tal:content="structure context/getText|nothing">Text</div>
+                </div>
+
+
+
             </div>
-            <div tal:condition="imersao">
+            <div tal:condition="imersao"
+                 tal:define="member context/@@plone_portal_state/member;
+                             session request/SESSION;
+                             parametri python: context.getParametri() and '?username=%s&token=%s'%(member.getUserName(),session.get('user_token')) or '';">
+
                 <iframe name="service"
                         id="service"
                         marginwidth="0"
@@ -102,26 +118,40 @@
                         height="600px"
                         frameborder="0"
                         src="link"
-                        tal:attributes="src context/getLink"></iframe>
+                        tal:attributes="src string: ${context/getLink}${parametri}"></iframe>
             </div>
-            <tal:cont condition="context/activ_share_footer|nothing">
+
+            <div>
+                <h3>Link:</h3>
+                <a href=""
+                   title=""
+                   target="_blank"
+                   tal:attributes="href string: ${context/getLink}${parametri};
+                                   title context/Title">
+                    <p>Link para o servi&ccedil;o</p>
+                </a>
+            </div>
+
+
+
+
+            <!--tal:cont condition="context/activ_share_footer|nothing">
                 <tal:cont condition="context/activ_share_footer|nothing">
                     <div metal:use-macro="context/vindula-content-share/macros/share" />
                 </tal:cont>
-            </tal:cont>
+            </tal:cont-->
 
-            <metal:block metal:use-macro="context/macro-propertis-content/macros/view" />
+            <metal:block metal:use-macro="context/macro-relateditens-content/macros/view" />
             <br>
 
             <metal:block metal:use-macro="context/macro-keywords-content/macros/view" />
             <br>
 
+            <metal:block metal:use-macro="context/macro-propertis-content/macros/view" />
+            <br>
+
             <metal:block metal:use-macro="context/macro-comments-content/macros/view" />
             <br>
-
-            <metal:block metal:use-macro="context/macro-relateditens-content/macros/view" />
-            <br>
-
 
 
         </metal:main>
@@ -129,5 +159,10 @@
             <!-- Remoção da macro below-content-body padrão do plone-->
             <span> </span>
         </metal:block>
+        <metal:block fill-slot="below-content">
+            <!-- Remoção da macro below-content padrão do plone-->
+            <span> </span>
+        </metal:block>
+
   </body>
 </html>

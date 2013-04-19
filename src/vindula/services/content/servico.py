@@ -14,12 +14,35 @@ from vindula.services import MessageFactory as _
 from vindula.services.config import PROJECTNAME
 from vindula.services.interfaces import IServico
 
+from vindula.controlpanel.browser.at.widget import VindulaReferenceSelectionWidget
+
 ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
+
+    atapi.ReferenceField('structures',
+        multiValued=0,
+        allowed_types=('OrganizationalStructure',),
+        relationship='structures',
+        widget=VindulaReferenceSelectionWidget(
+            #default_search_index='SearchableText',
+            typeview='list',
+            label=_(u"Estrutura Organizacional"),
+            description=_(u"Selecione uma estrutura organizacional."),
+            ),
+        required=False
+    ),
 
     atapi.StringField('link',
         widget=atapi.StringWidget(
             label=_(u'Link'),
             description=_(u'Informe o link para o serviço.') #' Um por linha.')
+        ),
+        required=False,
+    ),
+
+    atapi.BooleanField('parametri',
+        widget=atapi.BooleanWidget(
+            label=_(u'Parametros'),
+            description=_(u'Se selecionado, será passado no link do serviço os parametros de username e token.')
         ),
         required=False,
     ),

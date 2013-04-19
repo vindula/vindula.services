@@ -13,14 +13,22 @@
     <body>
         <metal:main fill-slot="content-core">
 
-            <tal:def define="portal_type python: ('Servico',);">
-                <metal:block metal:use-macro="context/macro-busiest-content/macros/view" />
+            <div class="conteiner" id="Servico">
+              <tal:def define="portal_type python: ('Servico',);">
+                  <metal:block metal:use-macro="context/macro-busiest-content/macros/view" />
 
+                  <hr/><br/><br/>
 
-                <metal:block metal:use-macro="context/macro_tabular_file/macros/view" />
+                  <metal:block metal:use-macro="context/macro_filter_file/macros/tabular" />
 
-            </tal:def>
+                  <hr/><br/><br/>
 
+                  <tal:def define="portal_type python: ('Servico',);">
+                    <metal:block metal:use-macro="context/macro_tabular_file/macros/view" />
+                  </tal:def>
+
+              </tal:def>
+            </div>
 
         </metal:main>
     </body>
