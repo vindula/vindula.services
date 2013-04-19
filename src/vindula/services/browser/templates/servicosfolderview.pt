@@ -21,7 +21,8 @@
 
                   <hr/><br/><br/>
 
-                  <tal:def define="portal_type python: ('Servico',);">
+                  <tal:def define="portal_type python: ('Servico',);
+                                   fields python:[{'label': 'Título', 'attribute': 'Title'}, {'label': 'Descricao', 'attribute': 'Description'}, {'label': 'Unidade', 'attribute': 'getStructures'}];">
                     <metal:block metal:use-macro="context/macro_tabular_file/macros/view" />
                   </tal:def>
 
