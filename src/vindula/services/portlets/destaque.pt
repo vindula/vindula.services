@@ -1,0 +1,20 @@
+<dl class="portlet" tal:define="view view/data">
+
+	<dt class="portletHeader">
+        <span class="portletTopLeft"></span>
+        <span class="tile" tal:content="view/get_title">Destaques</span>
+	    <span class="portletTopRight"></span>
+    </dt>
+    <dd class="portletItem">
+        <div id="_PortletDestaque">
+
+            <tal:rep repeat="item view/getDestaques">
+                <p tal:content= "item/Title"></p>
+            </tal:rep>
+
+
+        </div>
+	</dd>
+    <dd class="portletFooter"></dd>
+	<div class="visualClear"></div>
+</dl>

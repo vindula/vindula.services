@@ -1,0 +1,28 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="vindula.services">
+
+   <!-- Ensure Plone's portlets ZCML has already been processed;
+       without this, we may get a permission lookup error -->
+
+    <include package="plone.app.portlets"/>
+
+	<!-- -*- extra stuff goes here -*- -->
+
+	<!-- Portlet Serviços Destaque -->
+  	<plone:portlet
+		 name="vindula.services.PortletDestaques"
+		 interface=".destaque.IPortletDestaque"
+		 assignment=".destaque.Assignment"
+		 view_permission="zope2.View"
+		 edit_permission="cmf.ManagePortal"
+		 renderer=".destaque.Renderer"
+		 addview=".destaque.AddForm"
+		 editview=".destaque.EditForm"
+	 	/>
+
+
+
+
+</configure>

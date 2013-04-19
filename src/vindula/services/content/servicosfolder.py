@@ -14,7 +14,24 @@ from vindula.services import MessageFactory as _
 from vindula.services.config import PROJECTNAME
 from vindula.services.interfaces import IServicosFolder
 
-ServicosFolderSchema = ATFolderSchema.copy()
+from vindula.controlpanel.browser.at.widget import VindulaReferenceSelectionWidget
+
+ServicosFolderSchema = ATFolderSchema.copy() + atapi.Schema((
+
+
+    atapi.ReferenceField('destaques',
+        multiValued=1,
+        allowed_types=('Servico'),
+        label=_(u"Destaques"),
+        relationship='destaques',
+        widget=VindulaReferenceSelectionWidget(
+            label=_(u"Destaques"),
+            description='Selecione os Serviços em destaque.'
+        ),
+    ),
+
+))
+
 
 ServicosFolderSchema['title'].storage = atapi.AnnotationStorage()
 ServicosFolderSchema['description'].storage = atapi.AnnotationStorage()

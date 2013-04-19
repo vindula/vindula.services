@@ -6,6 +6,7 @@ from Acquisition import aq_inner
 from zope.component import getMultiAdapter
 
 from vindula.services.interfaces import IServico
+from vindula.services.interfaces import IServicosFolder
 
 grok.templatedir('templates')
 
@@ -21,3 +22,12 @@ class ServicoView(grok.View):
         self._path = '/'.join(context.getPhysicalPath())
         self.state = getMultiAdapter((context, self.request), name=u'plone_context_state')
         self.tools = getMultiAdapter((context, self.request), name=u'plone_tools')
+
+
+
+class ServicosFolderView(grok.View):
+    grok.context(IServicosFolder)
+    grok.require('zope2.View')
+    grok.name('view')
+
+

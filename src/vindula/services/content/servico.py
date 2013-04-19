@@ -19,7 +19,7 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
     atapi.StringField('link',
         widget=atapi.StringWidget(
             label=_(u'Link'),
-            description=_(u'Informe o link para o serviço. Um por linha.')
+            description=_(u'Informe o link para o serviço.') #' Um por linha.')
         ),
         required=False,
     ),

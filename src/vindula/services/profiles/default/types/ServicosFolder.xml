@@ -18,13 +18,15 @@
 <property name="allow_discussion">False</property>
  <property name="default_view">view</property>
  <property name="view_methods">
+    <element value="view"/>
+    <element value="folder_listing"/>
  </property>
  <alias from="(Default)" to="(dynamic view)"/>
  <alias from="edit" to="atct_edit"/>
  <alias from="sharing" to="@@sharing"/>
  <alias from="view" to="(selected layout)"/>
  <action title="View" action_id="view" category="object" condition_expr=""
-    url_expr="string:${folder_url}/" visible="True"
+         url_expr="string:${folder_url}" visible="True"
     i18n:attributes="title">
   <permission value="View"/>
  </action>

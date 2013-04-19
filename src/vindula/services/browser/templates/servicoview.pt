@@ -37,6 +37,15 @@
                 </div-->
                 <div class="visualClear"></div>
             </div>
+
+            <!-- Social Macros -->
+            <div>
+                <div metal:use-macro="context/macro-comboStandard-content/macros/view" />
+                <div metal:use-macro="context/macro-rating-content/macros/view" />
+
+            </div>
+
+
             <div tal:condition="not: imersao">
                 <div class="titulo_info">
                     <h2 tal:content="context/Title"></h2>
@@ -100,8 +109,25 @@
                     <div metal:use-macro="context/vindula-content-share/macros/share" />
                 </tal:cont>
             </tal:cont>
+
+            <metal:block metal:use-macro="context/macro-propertis-content/macros/view" />
+            <br>
+
+            <metal:block metal:use-macro="context/macro-keywords-content/macros/view" />
+            <br>
+
+            <metal:block metal:use-macro="context/macro-comments-content/macros/view" />
+            <br>
+
+            <metal:block metal:use-macro="context/macro-relateditens-content/macros/view" />
+            <br>
+
+
+
         </metal:main>
-    </body>
+        <metal:block fill-slot="below-content-body">
+            <!-- Remoção da macro below-content-body padrão do plone-->
+            <span> </span>
+        </metal:block>
+  </body>
 </html>
-
-
