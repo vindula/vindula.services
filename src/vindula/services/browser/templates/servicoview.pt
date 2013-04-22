@@ -105,10 +105,7 @@
 
 
             </div>
-            <div tal:condition="imersao"
-                 tal:define="member context/@@plone_portal_state/member;
-                             session request/SESSION;
-                             parametri python: context.getParametri() and '?username=%s&token=%s'%(member.getUserName(),session.get('user_token')) or '';">
+            <div tal:condition="imersao">
 
                 <iframe name="service"
                         id="service"
@@ -121,7 +118,7 @@
                         tal:attributes="src string: ${context/getLink}${parametri}"></iframe>
             </div>
 
-            <div>
+            <div tal:condition="not: imersao">
                 <h3>Link:</h3>
                 <a href=""
                    title=""
