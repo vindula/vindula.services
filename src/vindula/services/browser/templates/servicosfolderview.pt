@@ -1,33 +1,48 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br"
-      xmlns:tal="http://xml.zope.org/namespaces/tal"
-      xmlns:metal="http://xml.zope.org/namespaces/metal"
-      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      lang="pt-br"
-      metal:use-macro="context/main_template/macros/master"
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xml:lang="pt-br" 
+      xmlns:tal="http://xml.zope.org/namespaces/tal" 
+      xmlns:metal="http://xml.zope.org/namespaces/metal" 
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n" 
+      lang="pt-br" 
+      metal:use-macro="context/main_template/macros/master" 
       i18n:domain="vindula.services">
 
-    <head>
-    </head>
+<head>
+</head>
 
-    <body>
-        <metal:main fill-slot="content-core">
-            <div class="conteiner" id="Servico">
-              <tal:def define="portal_type python: ('Servico',);">
-                  <metal:block metal:use-macro="context/macro_more_access_content/macros/view" />
-
-                  <hr/><br/><br/>
-
-                  <metal:block metal:use-macro="context/macro_filter_file/macros/tabular" />
-
-                  <hr/><br/><br/>
-
-                  <tal:def define="portal_type python: ('Servico',);
-                                   fields python:[{'label': 'Título', 'attribute': 'Title'}, {'label': 'Descricao', 'attribute': 'Description'}, {'label': 'Unidade', 'attribute': 'getStructures'}];">
+<body>
+    <metal:main fill-slot="main">
+        <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
+        <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle" tal:condition="not:ajax_load" />
+        
+        <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="not:ajax_load" />
+        <div class="vd_access" tal:attributes="data_uid context/UID|nothing;
+                                               data_type context/portal_type|nothing" />
+        <div class="content-core" class="row">
+            
+            <tal:def define="portal_type python: ('Servico',);">
+                
+                <tal:def define="title string:MAIS ACESSADOS">
+                    <metal:block metal:use-macro="context/macro_more_access_content/macros/view" />
+                </tal:def>
+                
+                <h5>
+                    <tal:rep content="context/Title" />
+                    <hr/>
+                </h5>
+                
+                <metal:block metal:use-macro="context/macro_filter_file/macros/tabular" />
+                
+                <tal:def define="portal_type python: ('Servico',);
+                                 fields python:[{'label':  'Nome',  'attribute': 'Title'}, {'label':  'Descricao',  'attribute': 'Description'}, {'label':  'Unidade',  'attribute': 'getStructures'}];">
                     <metal:block metal:use-macro="context/macro_tabular_file/macros/view" />
-                  </tal:def>
+                </tal:def>
+                
+            </tal:def>
+        </div>
+        
+        <div id="viewlet-below-content-body" tal:content="structure provider:plone.belowcontentbody" tal:condition="not:ajax_load" />
+    </metal:main>
+</body>
 
-              </tal:def>
-            </div>
-        </metal:main>
-    </body>
 </html>
