@@ -6,17 +6,9 @@
 	    <span class="portletTopRight"></span>
     </dt>
     <dd class="portletItem">
-        <div id="_PortletDestaque">
 
-            <ul>
-                <tal:rep repeat="item view/getDestaques">
-                    <li><a tal:attributes="href item/absolute_url"
-                           tal:content="item/Title">
-                    </a></li>
-                </tal:rep>
-            </ul>
+        <metal:block metal:use-macro="context/macro_destaque/macros/portlet" />
 
-        </div>
 	</dd>
     <dd class="portletFooter"></dd>
 	<div class="visualClear"></div>

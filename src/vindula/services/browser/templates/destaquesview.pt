@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
+      lang="en"
+      i18n:domain="vindula.tile">
+
+  <head>
+
+  </head>
+  <body>
+    <metal:main fill-slot="content-core">
+        <metal:macro define-macro="view">
+
+
+          <div class="columns small-10">
+              <h4>
+                  <span>Destaque</span>
+                  <hr/>
+              </h4>
+          </div>
+
+        <metal:macro define-macro="portlet"
+                     tal:define="view_macro nocall:context/@@macro_destaque;">
+          <div id="_PortletDestaque">
+
+              <ul>
+                  <tal:rep repeat="item view_macro/getDestaques">
+                      <li><a tal:attributes="href item/absolute_url"
+                             tal:content="item/Title">
+                      </a></li>
+                  </tal:rep>
+              </ul>
+
+          </div>
+        </metal:macro>
+
+
+
+      </metal:macro>
+    </metal:main>
+  </body>
+</html>

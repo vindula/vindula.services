@@ -61,10 +61,6 @@ class Renderer(base.Renderer):
         else:
             return False
 
-    def getDestaques(self):
-        context = self.context
-        itens = context.getDestaques()
-        return itens
 
 
 
