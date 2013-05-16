@@ -16,7 +16,7 @@ class DestaquesView(grok.View):
     grok.name('macro_destaque')
 
     def update(self):
-        super(ServicoView,self).update()
+        super(DestaquesView,self).update()
         context = aq_inner(self.context)
         self._path = '/'.join(context.getPhysicalPath())
         self.state = getMultiAdapter((context, self.request), name=u'plone_context_state')
