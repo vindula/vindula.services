@@ -21,8 +21,7 @@
         <div class="content-core" class="row">
 
             <tal:def define="portal_type python: ('Servico',);">
-
-                <tal:def define="title string:MAIS ACESSADOS">
+                <tal:def define="title_box string:MAIS ACESSADOS">
                     <metal:block metal:use-macro="context/macro_more_access_content/macros/view" />
                 </tal:def>
 
@@ -36,7 +35,9 @@
                 <metal:block metal:use-macro="context/macro_filter_file/macros/tabular" />
 
                 <tal:def define="portal_type python: ('Servico',);
-                                 fields python:[{'label':  'Nome',  'attribute': 'Title'}, {'label':  'Descricao',  'attribute': 'Description'}, {'label':  'Unidade',  'attribute': 'getStructures'}];">
+                                 fields python:[{'label':  '',  'attribute': 'getImageIcone', 'is_image':  'True', 'width':  '50',},
+                                                {'label':  'Nome',  'attribute': 'Title'},
+                                                {'label':  'Unidade',  'attribute': 'getStructures'},];">
                     <metal:block metal:use-macro="context/macro_tabular_file/macros/view" />
                 </tal:def>
 

@@ -20,137 +20,115 @@
             <!-- Remoção da macro description padrão do plone-->
             <span> </span>
         </metal:block>
-
-        <metal:main fill-slot="content-core"
-                     tal:define="imersao context/getImersao;
-                                 member context/@@plone_portal_state/member;
-                                 session request/SESSION;
-                                 parametri python: context.getParametri() and '?u=%s&t=%s'%(member.getUserName(),session.get('user_token')) or '';">
-            <!-- Data -->
-            <div>
-                <tal:cond condition="context/active_date">
-                    <div class="info_topoBoxTipo">
-                        <div class="info_data" tal:condition="context/effective_date|nothing">
-                            <h4 tal:content="python: context.effective_date.strftime('%d/%m/%Y / %H:%M')"></h4>
-                        </div>
-                        <div class="visualClear"></div>
-                    </div>
-                </tal:cond>
-                <!--div class="indicacao_comentario" tal:condition="python: contcomments!= 0">
-                    <h4 tal:content="string:Comentários (${contcomments})"></h4>
-                </div-->
-                <div class="visualClear"></div>
-            </div>
-
-            <div tal:condition="context/getStructures">
-                <h3>Unidade</h3>
-
-                <span tal:content="python: context.getStructures().Title()"></span>
-                <br />
-
-            </div>
-            <br/>
-            <!-- Social Macros -->
-            <div>
-                <div metal:use-macro="context/macro-comboStandard-content/macros/view" />
-                <div metal:use-macro="context/macro-rating-content/macros/view" />
-
-            </div>
-            <br/>
-
-            <div tal:condition="not: imersao">
-                <!--div class="titulo_info">
-                    <div class="descricao_titulo">
-                        <p tal:content="context/Description"></p>
-                    </div>
-                </div-->
-
-
-
-                <tal:cont condition="view/check_share|nothing">
-                    <tal:cont condition="context/activ_share|nothing">
-                        <div metal:use-macro="context/vindula-content-share/macros/share" />
-                    </tal:cont>
-                </tal:cont>
-
-
-                <div>
-                    <tal:condition condition="context/getActiv_image">
-
-                        <div id="newsImageContainer" tal:condition="context/getImageRelac">
-                            <div id="parent-fieldname-image">
-                                <div class="bk_imagem">
-                                    <a tal:attributes="href python: context.getImageRelac().absolute_url() +'/image_view_fullscreen'">
-                                        <img tal:attributes="src python: context.getImageRelac().absolute_url()+'/image_mini';
-    														     alt context/imageCaption; title context/imageCaption;">
-                                    </a>
-                                    <p class="discreet img_legenda" tal:condition="context/imageCaption">
-                                        <span id="parent-fieldname-imageCaption" tal:content="context/imageCaption"></span>
-                                    </p>
+        <metal:main fill-slot="main">
+            <metal:main define-macro="main" tal:define="imersao context/getImersao;
+                                                        member context/@@plone_portal_state/member;
+                                                        session request/SESSION;
+                                                        parametri python: context.getParametri() and '?u=%s&t=%s'%(member.getUserName(),session.get('user_token')) or '';">
+                <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
+                <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="not:ajax_load" />
+                <div class="vd_access" tal:attributes="data_uid context/UID|nothing;
+                                                       data_type context/portal_type|nothing" />
+                
+                <script tal:attributes="src string:${context/portal_url}/++resource++vindula.content/js/vindula_accordion.js"></script>
+                
+                <div class="row service">
+                    <div class="content-core columns large-9">
+                        <div class="row">
+                            <div class="columns large-12">
+                                <h5>
+                                    <tal:rep content="context/Title" />
+                                    <hr/>
+                                </h5>
+                            </div>
+                            
+                            <div class="columns large-12">
+                                <div class="left" tal:condition="context/getStructures">
+                                    <strong>Unidade:</strong>
+                                    <a href="context/getStructures/absolute_url" tal:content="python: context.getStructures().Title()"></a>
+                                </div>
+                                
+                                <!-- Social Macros -->
+                                <div class="right">
+                                    <div metal:use-macro="context/macro-comboStandard-content/macros/view" />
+                                    <!--div metal:use-macro="context/macro-rating-content/macros/view" /-->
                                 </div>
                             </div>
+                            
+                            <div class="columns large-12 body">
+                                <tal:condition condition="context/getActiv_image">
+                                    <div class="left service-icon" tal:condition="context/getImageRelac">
+                                        <a tal:attributes="href python: context.getImageRelac().absolute_url() +'/image_view_fullscreen'">
+                                            <img tal:attributes="src python: context.getImageRelac().absolute_url()+'/image_mini';
+                                                                     alt context/imageCaption; title context/imageCaption;">
+                                        </a>
+                                    </div>
+                                </tal:condition>
+                                <p>
+                                    <strong tal:content="context/Description|nothing"></strong>
+                                </p>
+                
+                                <div tal:condition="not: imersao">
+                                    <!--tal:cont condition="view/check_share|nothing">
+                                        <tal:cont condition="context/activ_share|nothing">
+                                            <div metal:use-macro="context/vindula-content-share/macros/share" />
+                                        </tal:cont>
+                                    </tal:cont-->
+                                    <div class="descricao_destaque texto_pagina">
+                                        <p tal:content="structure context/getText|nothing"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div tal:condition="imersao">
+                                <div class="columns large-12">
+                                    <iframe name="service"
+                                            id="service"
+                                            marginwidth="0"
+                                            marginheight="0"
+                                            width="100%"
+                                            height="600px"
+                                            frameborder="0"
+                                            src="link"
+                                            tal:attributes="src string: ${context/getLink}${parametri}"></iframe>
+                                </div>
+                            </div>
+                
+                            <div tal:condition="not: imersao">
+                                <div class="columns large-12">
+                                    <strong>Link:</strong>
+                                    <a href=""
+                                       title=""
+                                       target="_blank"
+                                       tal:attributes="href string: ${context/getLink}${parametri};
+                                                       title context/Title">
+                                        <p>Link para o servi&ccedil;o</p>
+                                    </a>
+                                </div>
+                            </div>
+                
+                            <!--tal:cont condition="context/activ_share_footer|nothing">
+                                <tal:cont condition="context/activ_share_footer|nothing">
+                                    <div metal:use-macro="context/vindula-content-share/macros/share" />
+                                </tal:cont>
+                            </tal:cont-->
+                            
+                            <div class="columns large-12">
+                                <metal:block metal:use-macro="context/macro-relateditens-content/macros/view" />
+                    
+                                <metal:block metal:use-macro="context/macro-keywords-content/macros/view" />
+                    
+                                <metal:block metal:use-macro="context/macro-propertis-content/macros/view" />
+                    
+                                <metal:block metal:use-macro="context/macro-comments-content/macros/view" />
+                            </div>
                         </div>
-                    </tal:condition>
-
-                    <h3>Descrição</h3>
-                    <div class="descricao_destaque texto_pagina" tal:content="context/Description|nothing">Descrição</div>
-                    <div class="visualClear"></div>
+                    </div>
+                    <div class="columns large-3">
+                        <metal:block metal:use-macro="context/macro-last_access-content/macros/view" />
+                        <metal:block metal:use-macro="context/macro-see_also-content/macros/view" />
+                    </div>
                 </div>
-
-                <div>
-                    <h3>Detalhes</h3>
-                    <div class="descricao_destaque texto_pagina" tal:content="structure context/getText|nothing">Text</div>
-                </div>
-
-
-
-            </div>
-            <div tal:condition="imersao">
-
-                <iframe name="service"
-                        id="service"
-                        marginwidth="0"
-                        marginheight="0"
-                        width="100%"
-                        height="600px"
-                        frameborder="0"
-                        src="link"
-                        tal:attributes="src string: ${context/getLink}${parametri}"></iframe>
-            </div>
-
-            <div tal:condition="not: imersao">
-                <h3>Link:</h3>
-                <a href=""
-                   title=""
-                   target="_blank"
-                   tal:attributes="href string: ${context/getLink}${parametri};
-                                   title context/Title">
-                    <p>Link para o servi&ccedil;o</p>
-                </a>
-            </div>
-
-
-
-
-            <!--tal:cont condition="context/activ_share_footer|nothing">
-                <tal:cont condition="context/activ_share_footer|nothing">
-                    <div metal:use-macro="context/vindula-content-share/macros/share" />
-                </tal:cont>
-            </tal:cont-->
-
-            <metal:block metal:use-macro="context/macro-relateditens-content/macros/view" />
-            <br>
-
-            <metal:block metal:use-macro="context/macro-keywords-content/macros/view" />
-            <br>
-
-            <metal:block metal:use-macro="context/macro-propertis-content/macros/view" />
-            <br>
-
-            <metal:block metal:use-macro="context/macro-comments-content/macros/view" />
-            <br>
-
-
+            </metal:main>
         </metal:main>
         <metal:block fill-slot="below-content-body">
             <!-- Remoção da macro below-content-body padrão do plone-->
