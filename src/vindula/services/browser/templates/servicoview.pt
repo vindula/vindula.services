@@ -51,7 +51,7 @@
                                 <!-- Social Macros -->
                                 <div class="right">
                                     <div metal:use-macro="context/macro-comboStandard-content/macros/view" />
-                                    <!--div metal:use-macro="context/macro-rating-content/macros/view" /-->
+                                    <div metal:use-macro="context/macro-rating-content/macros/view" />
                                 </div>
                             </div>
                             
