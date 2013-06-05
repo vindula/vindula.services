@@ -30,8 +30,8 @@
                 <div class="vd_access" tal:attributes="data_uid context/UID|nothing;
                                                        data_type context/portal_type|nothing" />
                 
-                <script tal:attributes="src string:${context/portal_url}/++resource++vindula.content/js/vindula_accordion.js"></script>
-                
+                <script type="text/javascript" src=""
+                        tal:attributes="src string:${context/portal_url}/++resource++vindula.content/js/vindula_accordion.js"></script>
                 <div class="row service">
                     <div class="content-core columns large-9">
                         <div class="row">

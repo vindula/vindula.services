@@ -14,7 +14,7 @@
         
         <div class="row featured">
             <div class="columns small-12">
-                <div class="right" id="pag-nav">
+                <div class="ajax_pagination right" id="pag-nav">
                     <metal:block metal:use-macro="context/boll_batch/macros/navigation" />
                 </div>
                 <h5>
