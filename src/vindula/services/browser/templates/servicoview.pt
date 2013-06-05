@@ -10,9 +10,6 @@
             <tal:cond tal:condition="not: context/getActiv_portletLeft">
                 <tal:dummy tal:define="disable_column_one python:request.set('disable_plone.leftcolumn',1);"/>
             </tal:cond>
-            <tal:cond tal:condition="not: context/getActiv_portletRight">
-                <tal:dummy tal:define="disable_column_two python:request.set('disable_plone.rightcolumn',1);" />
-            </tal:cond>
         </metal:block>
     </head>
     <body>
