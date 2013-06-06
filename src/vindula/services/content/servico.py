@@ -88,8 +88,5 @@ class Servico(VindulaNews):
     schema = ServicoSchema
 
     _at_rename_after_creation = True
-    
-    def getFormattedStringTags(self):
-        return (' / ').join(self.Subject())
 
 atapi.registerType(Servico, PROJECTNAME)
