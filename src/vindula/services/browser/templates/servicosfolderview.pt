@@ -37,7 +37,8 @@
                 <tal:def define="portal_type python: ('Servico',);
                                  fields python:[{'label':  '',  'attribute': 'getImageIcone', 'is_image':  'True', 'width':  '50',},
                                                 {'label':  'Nome',  'attribute': 'Title'},
-                                                {'label':  'Unidade',  'attribute': 'getStructures'},];">
+                                                {'label':  'Unidade',  'attribute': 'getStructures'},
+                                                {'label':  'Tags',  'attribute': 'getFormattedStringTags', 'without_link': 'True'},]">
                     <metal:block metal:use-macro="context/macro_tabular_file/macros/view" />
                 </tal:def>
 
