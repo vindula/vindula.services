@@ -24,16 +24,21 @@
             <metal:main define-macro="main" tal:define="imersao context/getImersao;
                                                         member context/@@plone_portal_state/member;
                                                         session request/SESSION;
+                                                        active_accessory context/getActiv_portletAccessory;
                                                         parametri python: context.getParametri() and '?u=%s&t=%s'%(member.getUserName(),session.get('user_token')) or '';">
+
                 <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
                 <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="not:ajax_load" />
+
                 <div class="vd_access" tal:attributes="data_uid context/UID|nothing;
                                                        data_type context/portal_type|nothing" />
 
                 <script type="text/javascript" src=""
                         tal:attributes="src string:${context/portal_url}/++resource++vindula.content/js/vindula_accordion.js"></script>
+
                 <div class="row service">
-                    <div class="content-core columns large-9">
+                    <div class="content-core columns large-9"
+                          tal:attributes="class python: not active_accessory and 'content-core columns large-12' or 'content-core columns large-9' ">
                         <div class="row">
                             <div class="columns large-12">
                                 <h5>
@@ -119,11 +124,43 @@
 
                                 <metal:block metal:use-macro="context/macro-propertis-content/macros/view" />
 
+                                <tal:cond condition="not: active_accessory">
+
+                                    <div class="accordion">
+                                        <div class="title">
+                                            <h5>
+                                                <a class="" href="#">Últimos Acessos</a>
+                                                <hr/>
+                                            </h5>
+                                        </div>
+
+                                        <div class="container">
+                                            <metal:block metal:use-macro="context/macro-last_access-content/macros/view" />
+                                        </div>
+                                    </div>
+
+                                    <div class="accordion">
+                                        <div class="title">
+                                            <h5>
+                                                <a class="" href="#">Veja Também</a>
+                                                <hr/>
+                                            </h5>
+                                        </div>
+
+                                        <div class="container">
+                                            <metal:block metal:use-macro="context/macro-see_also-content/macros/view" />
+                                        </div>
+                                    </div>
+
+
+                                </tal:cond>
+
                                 <metal:block metal:use-macro="context/macro-comments-content/macros/view" />
+
                             </div>
                         </div>
                     </div>
-                    <div class="columns large-3">
+                    <div class="columns large-3" tal:condition="active_accessory">
                         <metal:block metal:use-macro="context/macro-last_access-content/macros/view" />
                         <metal:block metal:use-macro="context/macro-see_also-content/macros/view" />
                     </div>

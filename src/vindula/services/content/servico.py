@@ -74,6 +74,18 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
         ),
         required=False,
     ),
+
+    atapi.BooleanField(
+        name='activ_portletAccessory',
+        default=True,
+        widget=atapi.BooleanWidget(
+            label=_(u'Portlet Acessório'),
+            description=_(u'Se selecionado, ativa a visualização dos portet na coluna  acessória.'),
+        ),
+        required=False,
+    ),
+
+
     ))
 
 schemata.finalizeATCTSchema(ServicoSchema)
