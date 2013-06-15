@@ -13,7 +13,6 @@
 <body>
     <metal:main fill-slot="main">
         <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
-        <div id="viewlet-below-content-title" tal:content="structure provider:plone.belowcontenttitle" tal:condition="not:ajax_load" />
 
         <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="not:ajax_load" />
         <div class="vd_access" tal:attributes="data_uid context/UID|nothing;
@@ -38,7 +37,8 @@
                 <tal:def define="portal_type python: ('Servico',);
                                  fields python:[{'label':  '',  'attribute': 'getImageIcone', 'is_image':  'True', 'width':  '50',},
                                                 {'label':  'Nome',  'attribute': 'Title'},
-                                                {'label':  'Unidade',  'attribute': 'getStructures'},];">
+                                                {'label':  'Unidade',  'attribute': 'getStructures'},
+                                                {'label':  'Tags',  'attribute': 'getFormattedStringTags', 'without_link': 'True'},]">
                     <metal:block metal:use-macro="context/macro_tabular_file/macros/view" />
                 </tal:def>
 

@@ -7,14 +7,14 @@
                          b_start request/b_start | b_start;
                          batch python:Batch(destaques, int(b_size), int(b_start), pagerange=len(destaques));">
 
-    <div class="list_file" id="list_file">
+    <div class="list_file" id="destaque_view">
         <input type="hidden" id="b_size" tal:attributes="value b_size" />
         <input type="hidden" id="b_start" tal:attributes="value b_start" />
         <input type="hidden" id="absolute_url" tal:attributes="value string:${context/absolute_url}/macro_destaque" >
         
         <div class="row featured">
             <div class="columns small-12">
-                <div class="right" id="pag-nav">
+                <div class="ajax_pagination right" id="pag-nav">
                     <metal:block metal:use-macro="context/boll_batch/macros/navigation" />
                 </div>
                 <h5>
@@ -26,17 +26,19 @@
             <metal:macro define-macro="portlet"
                          tal:define="view_macro nocall:view_macro|nocall:context/@@macro_destaque;
                                      batch batch|view_macro/getDestaques;">
-                <div class="columns small-12" id="_PortletDestaque">
-                    <div class="row">
-                        <div tal:repeat="item batch"
-                             tal:attributes="class python:'large-%s columns item-service' % (int(12/len(view_macro.getDestaques())))">
-                                <img class="left" tal:attributes="src item/getImageIcone;
-                                                     title item/Title;
-                                                     alt item/Title;">
-                                <a class="left" tal:attributes="href item/absolute_url" tal:content="item/Title"></a>
+                <div class="container clear">
+                    <div class="columns small-12" id="_PortletDestaque">
+                        <div class="row">
+                            <div tal:repeat="item batch" class="large-3 columns item-service"
+                                 tal:attributes="class python:'large-%s columns item-service' % (int(12/len(batch)))">
+                                    <img class="left" tal:attributes="src item/getImageIcone;
+                                                         title item/Title;
+                                                         alt item/Title;">
+                                    <a class="left" tal:attributes="href item/absolute_url" tal:content="item/Title"></a>
+                            </div>
                         </div>
                     </div>
-              </div>
+                </div>
             </metal:macro>
         </div>
     </div>
