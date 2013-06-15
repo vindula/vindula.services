@@ -31,10 +31,10 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
         required=False
     ),
 
-    atapi.StringField('link',
-        widget=atapi.StringWidget(
+    atapi.TextField('link',
+        widget=atapi.TextAreaWidget(
             label=_(u'Link'),
-            description=_(u'Informe o link para o serviço.') #' Um por linha.')
+            description=_(u'Informe o link para o serviço, Um por linha.')
         ),
         required=False,
     ),
