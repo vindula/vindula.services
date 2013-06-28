@@ -167,7 +167,12 @@
 
                                 </tal:cond>
 
-                                <metal:block metal:use-macro="context/macro-comments-content/macros/view" />
+                                <tal:cond condition="context/allowDiscussion|nothing">
+
+                                    <metal:block metal:use-macro="context/macro-comments-content/macros/view" />
+
+                                </tal:cond>
+
 
                             </div>
                         </div>
