@@ -20,12 +20,13 @@
         <div class="content-core">
             <tal:def define="title_box string:MAIS ACESSADOS;
                              b_size python:8;
-                             services string:True;">
+                             services string:True;
+                             portal_type string:Servico;">
                 <metal:block metal:use-macro="context/macro_more_access_content/macros/view" />
             </tal:def>
 
             <metal:block metal:use-macro="context/macro_destaque/macros/view" />
-        
+
             <h5 class="title">
                 <tal:rep content="context/Title" />
                 <hr/>
