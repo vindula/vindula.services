@@ -18,7 +18,7 @@
                     <metal:block metal:use-macro="context/boll_batch/macros/navigation" />
                 </div>
                 <h5>
-                  <span>EM DESTAQUE</span>
+                  <span>Em Destaque</span>
                   <hr/>
                 </h5>
             </div>
