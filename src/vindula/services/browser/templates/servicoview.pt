@@ -164,23 +164,19 @@
                                         </div>
                                     </div>
 
-
                                 </tal:cond>
 
-                                <tal:cond condition="context/allowDiscussion|nothing">
-
-                                    <metal:block metal:use-macro="context/macro-comments-content/macros/view" />
-
-                                </tal:cond>
-
+                                <metal:block metal:use-macro="context/macro-comments-content/macros/view" />
 
                             </div>
                         </div>
                     </div>
+
                     <div class="columns large-3" tal:condition="active_accessory">
                         <metal:block metal:use-macro="context/macro-last_access-content/macros/view" />
                         <metal:block metal:use-macro="context/macro-see_also-content/macros/view" />
                     </div>
+
                 </div>
             </metal:main>
         </metal:main>
