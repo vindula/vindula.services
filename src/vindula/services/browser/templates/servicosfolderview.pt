@@ -18,7 +18,8 @@
         <div class="vd_access" tal:attributes="data_uid context/UID|nothing;
                                                data_type context/portal_type|nothing" />
         <div class="content-core">
-            <tal:def define="title_box string:Mais acessados;
+            <tal:def define="title_box string:Mais Acessados;
+                             portal_type python:['Servico'];
                              b_size python:8;
                              services string:True;
                              portal_type string:Servico;">
@@ -38,7 +39,8 @@
                              fields python:[{'label':  '',  'attribute': 'getImageIcone', 'is_image':  'True', 'width':  '50',},
                                             {'label':  'Nome',  'attribute': 'Title'},
                                             {'label':  'Unidade',  'attribute': 'getStructures'},
-                                            {'label':  'Tags',  'attribute': 'getFormattedStringTags', 'without_link': 'True'},]">
+                                            {'label':  'Tags',  'attribute': 'getFormattedStringTags', 'without_link': 'True'},
+                                            {'label':  'Açoes',  'attribute': 'getActions', 'is_action':  'True', 'width':  '40',},]">
                 <metal:block metal:use-macro="context/macro_tabular_file/macros/view" />
             </tal:def>
 
