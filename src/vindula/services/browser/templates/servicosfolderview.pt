@@ -40,7 +40,7 @@
                                             {'label':  'Nome',  'attribute': 'Title'},
                                             {'label':  'Unidade',  'attribute': 'getStructures'},
                                             {'label':  'Tags',  'attribute': 'getFormattedStringTags', 'without_link': 'True'},
-                                            {'label':  'Açoes',  'attribute': 'getActions', 'is_action':  'True', 'width':  '40',},]">
+                                            {'label':  'Ações',  'attribute': 'getActions', 'is_action':  'True', 'width':  '40',},]">
                 <metal:block metal:use-macro="context/macro_tabular_file/macros/view" />
             </tal:def>
 
