@@ -29,10 +29,3 @@ class ServicosFolderView(grok.View):
     grok.context(IServicosFolder)
     grok.require('zope2.View')
     grok.name('view')
-    
-    def getServices(self):
-        catalog_tools = getToolByName(self.context, 'portal_catalog')
-        return catalog_tools({'review_state': ['published', 'internally_published', 'external'],
-                              'portal_type': ['Servico'],
-                              'path': {'query': '/'.join(self.context.getPhysicalPath()), 'depth': 99}
-                              })
