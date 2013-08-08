@@ -35,7 +35,7 @@
 
             <metal:block metal:use-macro="context/macro_filter_file/macros/tabular" />
 
-            <tal:def define="list_files view/getServices;
+            <tal:def define="portal_type python: ('Servico',);
                              fields python:[{'label':  '',  'attribute': 'getImageIcone', 'is_image':  'True', 'width':  '50',},
                                             {'label':  'Nome',  'attribute': 'Title'},
                                             {'label':  'Unidade',  'attribute': 'getStructures'},
