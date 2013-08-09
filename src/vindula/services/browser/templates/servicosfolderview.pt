@@ -18,7 +18,7 @@
         <div class="vd_access" tal:attributes="data_uid context/UID|nothing;
                                                data_type context/portal_type|nothing" />
         <div class="content-core">
-            <tal:def define="title_box string:Mais Acessados;
+            <tal:def define="title_box string:Mais acessados;
                              portal_type python:['Servico'];
                              b_size python:8;
                              services string:True;
