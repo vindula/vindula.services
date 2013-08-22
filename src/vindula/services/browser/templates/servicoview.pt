@@ -48,11 +48,6 @@
                             </div>
 
                             <div class="columns large-12">
-                                <div class="left" tal:condition="context/getStructures">
-                                    <strong>Unidade:</strong>
-                                    <a href="context/getStructures/absolute_url" tal:content="python: context.getStructures().Title()"></a>
-                                </div>
-
                                 <!-- Social Macros -->
                                 <div class="right">
                                     <div metal:use-macro="context/macro-comboStandard-content/macros/view" />
@@ -84,12 +79,11 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div tal:condition="imersao">
-
-                                <tal:rep repeat="link python: context.getLink().splitlines()">
-
+                                <tal:rep repeat="link python: context.getLink()">
                                     <div class="columns large-12">
-                                        <strong>Link: <span tal:replace="repeat/link/number">1</span> </strong>
+                                        <strong><span tal:replace="link/title|string:'Link'">Link</span>:</strong>
                                         <iframe name="service"
                                                 id="service"
                                                 marginwidth="0"
@@ -98,7 +92,7 @@
                                                 height="600px"
                                                 frameborder="0"
                                                 src="link"
-                                                tal:attributes="src string:${link}${parametri}"></iframe>
+                                                tal:attributes="src python:parametri and view.setUrlParams(link.get('link'), parametri) or link.get('link');"></iframe>
                                         <br/>
                                     </div>
                                 </tal:rep>
@@ -106,20 +100,18 @@
 
                             <div tal:condition="not: imersao">
                                 <div class="columns large-12">
+                                    <tal:rep repeat="link python: context.getLink()">
 
-                                    <tal:rep repeat="link python: context.getLink().splitlines()">
-
-                                        <strong>Link: <span tal:replace="repeat/link/number">1</span> </strong>
+                                        <strong><span tal:replace="link/title|string:'Link'">Link</span>:</strong>
                                         <a href=""
                                            title=""
                                            target="_blank"
-                                           tal:attributes="href string:${link}${parametri};
-                                                           title context/Title">
+                                           tal:attributes="href python:parametri and view.setUrlParams(link.get('link'), parametri) or link.get('link');
+                                                           title link/title">
                                             <p>Link para o servi&ccedil;o</p>
                                         </a>
 
                                     </tal:rep>
-
                                 </div>
                             </div>
 

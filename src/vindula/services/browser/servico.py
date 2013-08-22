@@ -22,7 +22,11 @@ class ServicoView(grok.View):
         self._path = '/'.join(context.getPhysicalPath())
         self.state = getMultiAdapter((context, self.request), name=u'plone_context_state')
         self.tools = getMultiAdapter((context, self.request), name=u'plone_tools')
-
+        
+    def setUrlParams(self, url, params):
+        if url.find('?') != -1:
+            params = '&'+params[1:]
+        return url+params
 
 
 class ServicosFolderView(grok.View):

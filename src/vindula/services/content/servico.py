@@ -10,6 +10,9 @@ from Products.ATContentTypes.content import schemata
 
 from vindula.content.content.vindulanews import VindulaNews, VindulaNews_schema
 
+from Products.DataGridField import DataGridField, DataGridWidget
+from Products.DataGridField.Column import Column
+
 from vindula.services import MessageFactory as _
 from vindula.services.config import PROJECTNAME
 from vindula.services.interfaces import IServico
@@ -31,12 +34,25 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
         required=False
     ),
 
-    atapi.TextField('link',
-        widget=atapi.TextAreaWidget(
-            label=_(u'Link'),
-            description=_(u'Informe o link para o serviço, Um por linha.')
-        ),
-        required=False,
+#    atapi.TextField('link',
+#        widget=atapi.TextAreaWidget(
+#            label=_(u'Link'),
+#            description=_(u'Informe o link para o serviço, Um por linha.')
+#        ),
+#        required=False,
+#    ),
+    
+    DataGridField('link',
+        columns=('title','link',),
+        allow_delete = True,
+        allow_insert = True,
+        allow_reorder = True,
+        widget = DataGridWidget(label="Links",
+            description="Relecione o título do links com o seu valor.",
+            columns= {
+                "title" : Column(_(u"Título")),
+                "link" : Column(_(u"Link")),
+        }),
     ),
 
     atapi.BooleanField('parametri',
@@ -86,7 +102,7 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
     ),
 
 
-    ))
+))
 
 schemata.finalizeATCTSchema(ServicoSchema)
 
