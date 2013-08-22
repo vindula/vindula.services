@@ -129,19 +129,7 @@
                                 </tal:rep>
                             </div>
                             
-                            <!--tal:cont condition="context/activ_share_footer|nothing">
-                                <tal:cont condition="context/activ_share_footer|nothing">
-                                    <div metal:use-macro="context/vindula-content-share/macros/share" />
-                                </tal:cont>
-                            </tal:cont-->
-
                             <div class="columns large-12">
-                                <metal:block metal:use-macro="context/macro-relateditens-content/macros/view" />
-
-                                <metal:block metal:use-macro="context/macro-keywords-content/macros/view" />
-
-                                <metal:block metal:use-macro="context/macro-propertis-content/macros/view" />
-
                                 <tal:cond condition="not: active_accessory">
 
                                     <div class="accordion">
@@ -171,6 +159,12 @@
                                     </div>
 
                                 </tal:cond>
+                                
+                                <metal:block metal:use-macro="context/macro-relateditens-content/macros/view" />
+
+                                <metal:block metal:use-macro="context/macro-keywords-content/macros/view" />
+
+                                <metal:block metal:use-macro="context/macro-propertis-content/macros/view" />
 
                                 <metal:block metal:use-macro="context/macro-comments-content/macros/view" />
 
