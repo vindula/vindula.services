@@ -37,7 +37,7 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
     atapi.TextField('link',
         widget=atapi.TextAreaWidget(
             label=_(u'Link'),
-            description=_(u'Informe o link para o serviço (campo antigo, está aqui somente para migração para o novo formato).')
+            description=_(u'Informe o link para o serviço (campo antigo, está aqui somente até migração para o novo formato).')
         ),
         required=False,
     ),

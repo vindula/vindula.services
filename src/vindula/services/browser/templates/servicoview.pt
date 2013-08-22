@@ -101,16 +101,16 @@
                             <div tal:condition="not: imersao">
                                 <div class="columns large-12">
                                     <tal:rep repeat="link python: context.getLinkDataGrid()">
-
-                                        <strong><span tal:replace="link/title|string:'Link'">Link</span>:</strong>
-                                        <a href=""
-                                           title=""
-                                           target="_blank"
-                                           tal:attributes="href python:parametri and view.setUrlParams(link.get('link'), parametri) or link.get('link');
-                                                           title link/title">
-                                            <p>Link para o servi&ccedil;o</p>
-                                        </a>
-
+                                        <tal:cond condition="link">
+                                            <strong><span tal:replace="link/title|string:'Link'">Link</span>:</strong>
+                                            <a href=""
+                                               title=""
+                                               target="_blank"
+                                               tal:attributes="href python:parametri and view.setUrlParams(link.get('link'), parametri) or link.get('link');
+                                                               title link/title">
+                                                <p>Link para o servi&ccedil;o</p>
+                                            </a>
+                                        </tal:cond>
                                     </tal:rep>
                                 </div>
                             </div>
