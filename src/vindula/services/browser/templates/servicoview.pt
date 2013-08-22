@@ -48,35 +48,64 @@
                             </div>
 
                             <div class="columns large-12">
-                                <!-- Social Macros -->
-                                <div class="right">
-                                    <div metal:use-macro="context/macro-comboStandard-content/macros/view" />
-                                    <div metal:use-macro="context/macro-rating-content/macros/view" />
-                                </div>
-                            </div>
-
-                            <div class="columns large-12 body">
-                                <tal:condition condition="context/getActiv_image">
-                                    <div class="left service-icon" tal:condition="context/getImageRelac">
-                                        <a tal:attributes="href python: context.getImageRelac().absolute_url() +'/image_view_fullscreen'">
-                                            <img tal:attributes="src python: context.getImageRelac().absolute_url()+'/image_mini';
-                                                                     alt context/imageCaption; title context/imageCaption;">
-                                        </a>
+                                <div class="row">
+                                    <div class="columns large-9 body">
+                                        <div class="clear">
+                                            <div class="structure-link" tal:condition="context/getStructures">
+                                                <strong>Unidade:</strong>
+                                                <a tal:define="structure context/getStructures;"
+                                                   tal:attributes="href structure/absolute_url" 
+                                                   tal:content="structure/Title"></a>
+                                            </div>
+                                            
+                                            <tal:condition condition="context/getActiv_image">
+                                                <div class="left service-icon" tal:condition="context/getImageRelac">
+                                                    <a tal:attributes="href python: context.getImageRelac().absolute_url() +'/image_view_fullscreen'">
+                                                        <img tal:attributes="src python: context.getImageRelac().absolute_url()+'/image_mini';
+                                                                                 alt context/imageCaption; title context/imageCaption;">
+                                                    </a>
+                                                </div>
+                                            </tal:condition>
+                                            
+                                            <p>
+                                                <strong tal:content="context/Description|nothing"></strong>
+                                            </p>
+                                            
+                                            <div tal:condition="context/getText|nothing">
+                                                <!--tal:cont condition="view/check_share|nothing">
+                                                    <tal:cont condition="context/activ_share|nothing">
+                                                        <div metal:use-macro="context/vindula-content-share/macros/share" />
+                                                    </tal:cont>
+                                                </tal:cont-->
+                                                <div class="descricao_destaque texto_pagina">
+                                                    <p tal:content="structure context/getText|nothing"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="clear service-links" tal:condition="not:imersao">
+                                            <tal:rep repeat="link python: context.getLinkDataGrid()">
+                                                <tal:cond condition="link">
+                                                    <strong><span tal:replace="link/title|string:Link">Link</span>:</strong>
+                                                    <a href=""
+                                                       title=""
+                                                       target="_blank"
+                                                       tal:attributes="href python:parametri and view.setUrlParams(link.get('link'), parametri) or link.get('link');
+                                                                       title link/title">
+                                                        <p>Link para o servi&ccedil;o</p>
+                                                    </a>
+                                                </tal:cond>
+                                            </tal:rep>
+                                        </div>
+                                        
                                     </div>
-                                </tal:condition>
-                                <p>
-                                    <strong tal:content="context/Description|nothing"></strong>
-                                </p>
-
-                                <div tal:condition="not: imersao">
-                                    <!--tal:cont condition="view/check_share|nothing">
-                                        <tal:cont condition="context/activ_share|nothing">
-                                            <div metal:use-macro="context/vindula-content-share/macros/share" />
-                                        </tal:cont>
-                                    </tal:cont-->
-                                    <div class="descricao_destaque texto_pagina">
-                                        <p tal:content="structure context/getText|nothing"></p>
+                                    
+                                    <!-- Social Macros -->
+                                    <div class="columns large-3 social-box">
+                                        <div metal:use-macro="context/macro-comboStandard-content/macros/view" />
+                                        <div metal:use-macro="context/macro-rating-content/macros/view" />
                                     </div>
+                                    
                                 </div>
                             </div>
 
@@ -99,24 +128,7 @@
                                     </div>
                                 </tal:rep>
                             </div>
-
-                            <div tal:condition="not: imersao">
-                                <div class="columns large-12">
-                                    <tal:rep repeat="link python: context.getLinkDataGrid()">
-                                        <tal:cond condition="link">
-                                            <strong><span tal:replace="link/title|string:Link">Link</span>:</strong>
-                                            <a href=""
-                                               title=""
-                                               target="_blank"
-                                               tal:attributes="href python:parametri and view.setUrlParams(link.get('link'), parametri) or link.get('link');
-                                                               title link/title">
-                                                <p>Link para o servi&ccedil;o</p>
-                                            </a>
-                                        </tal:cond>
-                                    </tal:rep>
-                                </div>
-                            </div>
-
+                            
                             <!--tal:cont condition="context/activ_share_footer|nothing">
                                 <tal:cont condition="context/activ_share_footer|nothing">
                                     <div metal:use-macro="context/vindula-content-share/macros/share" />
