@@ -81,7 +81,7 @@
                             </div>
 
                             <div tal:condition="imersao">
-                                <tal:rep repeat="link python: context.getLink()">
+                                <tal:rep repeat="link python: context.getLinkDataGrid()">
                                     <div class="columns large-12">
                                         <strong><span tal:replace="link/title|string:'Link'">Link</span>:</strong>
                                         <iframe name="service"
@@ -100,7 +100,7 @@
 
                             <div tal:condition="not: imersao">
                                 <div class="columns large-12">
-                                    <tal:rep repeat="link python: context.getLink()">
+                                    <tal:rep repeat="link python: context.getLinkDataGrid()">
 
                                         <strong><span tal:replace="link/title|string:'Link'">Link</span>:</strong>
                                         <a href=""

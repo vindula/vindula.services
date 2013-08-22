@@ -34,15 +34,15 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
         required=False
     ),
 
-#    atapi.TextField('link',
-#        widget=atapi.TextAreaWidget(
-#            label=_(u'Link'),
-#            description=_(u'Informe o link para o serviço, Um por linha.')
-#        ),
-#        required=False,
-#    ),
+    atapi.TextField('link',
+        widget=atapi.TextAreaWidget(
+            label=_(u'Link'),
+            description=_(u'Informe o link para o serviço, Um por linha.')
+        ),
+        required=False,
+    ),
     
-    DataGridField('link',
+    DataGridField('linkDataGrid',
         columns=('title','link',),
         allow_delete = True,
         allow_insert = True,
