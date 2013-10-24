@@ -100,8 +100,64 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
         ),
         required=False,
     ),
-
-
+    
+    #Schemata das opçoes do accordion
+    
+    atapi.BooleanField(
+        name='show_properties',
+        default=True,
+        widget=atapi.BooleanWidget(
+            label=_(u'Mostrar propriedades'),
+            description=_(u'Mostra a opção de propriedades do serviço.'),
+        ),
+        required=False,
+        schemata='settings'
+    ),
+    
+    atapi.BooleanField(
+        name='show_changes',
+        default=True,
+        widget=atapi.BooleanWidget(
+            label=_(u'Mostrar modificações'),
+            description=_(u'Mostra a opção de modificações do serviço.'),
+        ),
+        required=False,
+        schemata='settings'
+    ),
+    
+    atapi.BooleanField(
+        name='show_last_access',
+        default=True,
+        widget=atapi.BooleanWidget(
+            label=_(u'Mostrar últimos acessos'),
+            description=_(u'Mostra a opção de últimos acessos do serviço.'),
+        ),
+        required=False,
+        schemata='settings'
+    ),
+    
+    atapi.BooleanField(
+        name='show_see_also',
+        default=True,
+        widget=atapi.BooleanWidget(
+            label=_(u'Mostrar veja também'),
+            description=_(u'Mostra a opção de veja também do serviço.'),
+        ),
+        required=False,
+        schemata='settings'
+    ),
+    
+    atapi.BooleanField(
+        name='show_tags',
+        default=True,
+        widget=atapi.BooleanWidget(
+            label=_(u'Mostrar tags'),
+            description=_(u'Mostra as tags do serviço.'),
+        ),
+        required=False,
+        schemata='settings'
+    ),
+    
 ))
 
 schemata.finalizeATCTSchema(ServicoSchema)

@@ -25,7 +25,8 @@
                                                         member context/@@plone_portal_state/member;
                                                         session request/SESSION;
                                                         active_accessory context/getActiv_portletAccessory;
-                                                        parametri python: context.getParametri() and '?u=%s&t=%s'%(member.getUserName(),session.get('user_token')) or '';">
+                                                        parametri python: context.getParametri() and '?u=%s&t=%s'%(member.getUserName(),session.get('user_token')) or '';
+                                                        has_acessory python: active_accessory and (context.getShow_last_access() or context.getShow_see_also())">
 
                 <div id="viewlet-above-content-title" tal:content="structure provider:plone.abovecontenttitle" tal:condition="not:ajax_load" />
                 <div id="viewlet-above-content-body" tal:content="structure provider:plone.abovecontentbody" tal:condition="not:ajax_load" />
@@ -38,7 +39,7 @@
 
                 <div class="row service">
                     <div class="content-core columns large-9"
-                          tal:attributes="class python: not active_accessory and 'content-core columns large-12' or 'content-core columns large-9' ">
+                          tal:attributes="class python: has_acessory and 'content-core columns large-9' or 'content-core columns large-12' ">
                         <div class="row">
                             <div class="columns large-12">
                                 <h5>
@@ -49,7 +50,8 @@
 
                             <div class="columns large-12">
                                 <div class="row">
-                                    <div class="columns large-9 body">
+                                    <div class="columns large-8 body"
+                                         tal:attributes="class python: 'columns large-%s body' % (has_acessory and '8' or '9') ">
                                         <div class="clear">
                                             <div class="structure-link" tal:condition="context/getStructures">
                                                 <strong>Unidade:</strong>
@@ -101,11 +103,12 @@
                                     </div>
                                     
                                     <!-- Social Macros -->
-                                    <div class="columns large-3 social-box">
+                                    <div class="columns large-4 social-box"
+                                         tal:attributes="class python: 'columns large-%s body' % (has_acessory and '4' or '3') ">
+                                             
                                         <div metal:use-macro="context/macro-comboStandard-content/macros/view" />
                                         <div metal:use-macro="context/macro-rating-content/macros/view" />
                                     </div>
-                                    
                                 </div>
                             </div>
 
@@ -131,48 +134,65 @@
                             
                             <div class="columns large-12">
                                 <tal:cond condition="not: active_accessory">
-                                    <div class="accordion">
-                                        <div class="title">
-                                            <h5>
-                                                <a class="" href="#">Veja Também</a>
-                                                <hr/>
-                                            </h5>
+                                    <tal:cond condition="context/getShow_see_also">
+                                        <div class="accordion">
+                                            <div class="title">
+                                                <h5>
+                                                    <a class="" href="#">Veja Também</a>
+                                                    <hr/>
+                                                </h5>
+                                            </div>
+    
+                                            <div class="container">
+                                                <metal:block metal:use-macro="context/macro-see_also-content/macros/full_view" />
+                                            </div>
                                         </div>
-
-                                        <div class="container">
-                                            <metal:block metal:use-macro="context/macro-see_also-content/macros/full_view" />
-                                        </div>
-                                    </div>
+                                    </tal:cond>
                                     
-                                    <div class="accordion">
-                                        <div class="title">
-                                            <h5>
-                                                <a class="" href="#">Últimos Acessos</a>
-                                                <hr/>
-                                            </h5>
+                                    <tal:cond condition="context/getShow_last_access">
+                                        <div class="accordion">
+                                            <div class="title">
+                                                <h5>
+                                                    <a class="" href="#">Últimos Acessos</a>
+                                                    <hr/>
+                                                </h5>
+                                            </div>
+    
+                                            <div class="container">
+                                                <metal:block metal:use-macro="context/macro-last_access-content/macros/view" />
+                                            </div>
                                         </div>
-
-                                        <div class="container">
-                                            <metal:block metal:use-macro="context/macro-last_access-content/macros/view" />
-                                        </div>
-                                    </div>
+                                    </tal:cond>
                                 </tal:cond>
                                 
                                 <metal:block metal:use-macro="context/macro-relateditens-content/macros/view" />
-
-                                <metal:block metal:use-macro="context/macro-keywords-content/macros/view" />
-
-                                <metal:block metal:use-macro="context/macro-propertis-content/macros/view" />
-
+                                
+                                <tal:cond condition="context/getShow_tags">
+                                    <metal:block metal:use-macro="context/macro-keywords-content/macros/view" />
+                                </tal:cond>
+                                
+                                <tal:cond condition="context/getShow_properties">
+                                    <metal:block metal:use-macro="context/macro-propertis-content/macros/view" />
+                                </tal:cond>
+                                
+                                <tal:cond condition="context/getShow_changes">
+                                    <metal:block metal:use-macro="context/macro-propertis-content/macros/changes_view" />
+                                </tal:cond>
+                                
                                 <metal:block metal:use-macro="context/macro-comments-content/macros/view" />
 
                             </div>
                         </div>
                     </div>
 
-                    <div class="columns large-3" tal:condition="active_accessory">
-                        <metal:block metal:use-macro="context/macro-last_access-content/macros/view" />
-                        <metal:block metal:use-macro="context/macro-see_also-content/macros/view" />
+                    <div class="columns large-3" tal:condition="python: active_accessory and (context.getShow_last_access() or context.getShow_see_also())">
+                        <tal:cond condition="context/getShow_last_access">
+                            <metal:block metal:use-macro="context/macro-last_access-content/macros/view" />
+                        </tal:cond>
+                        
+                        <tal:cond condition="context/getShow_see_also">
+                            <metal:block metal:use-macro="context/macro-see_also-content/macros/view" />
+                        </tal:cond>
                     </div>
 
                 </div>
