@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from zope.i18nmessageid import MessageFactory as BaseMessageFactory
 
 from vindula.services import config
@@ -8,6 +7,12 @@ from Products.Archetypes import atapi
 from Products.CMFCore import utils
 
 MessageFactory = BaseMessageFactory('vindula.services')
+
+# first fix the validator
+from Products.validation import validation
+from validators import UpdateStructureOfService
+
+validation.register(UpdateStructureOfService('isNewStructure'))
 
 
 def initialize(context):

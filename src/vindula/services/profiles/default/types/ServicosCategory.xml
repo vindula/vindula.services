@@ -1,26 +1,25 @@
 <?xml version="1.0"?>
-<object name="ServicosFolder"
+<object name="ServicosCategory"
    meta_type="Factory-based Type Information with dynamic views"
    i18n:domain="vindula.services" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
- <property name="title" i18n:translate="">Services</property>
+ <property name="title" i18n:translate="">Categoria do serviço</property>
  <property name="description"
      i18n:translate=""></property>
- <property name="content_icon">++resource++vindula.services/images/services.png</property>
- <property name="content_meta_type">ServicosFolder</property>
+ <property name="content_icon">++resource++vindula.content.images/folder.gif</property>
+ <property name="content_meta_type">ServicosCategory</property>
  <property name="product">vindula.services</property>
- <property name="factory">addServicosFolder</property>
- <property name="immediate_view">view</property>
- <property name="global_allow">True</property>
+ <property name="factory">addServicosCategory</property>
+ <property name="immediate_view">base_view</property>
+ <property name="global_allow">False</property>
  <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
-   <element value="ServicosCategory"/>
+   <element value="Servico"/>
    <element value="VindulaFolder"/>
-   <element value="vindula.content.content.vindulacontentapi"/>
  </property>
 <property name="allow_discussion">False</property>
- <property name="default_view">view</property>
+ <property name="default_view">base_view</property>
  <property name="view_methods">
-    <element value="view"/>
+    <element value="base_view"/>
     <element value="folder_listing"/>
  </property>
  <alias from="(Default)" to="(dynamic view)"/>

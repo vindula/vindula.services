@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from five import grok
 
 from ComputedAttribute import ComputedAttribute
 from Acquisition import aq_base
@@ -7,11 +8,13 @@ from zope.interface import implements
 
 from Products.Archetypes import atapi
 from Products.ATContentTypes.content import schemata
-
-from vindula.content.content.vindulanews import VindulaNews, VindulaNews_schema
+from Products.CMFCore.utils import getToolByName
+from Products.Archetypes.interfaces import IObjectEditedEvent, IObjectInitializedEvent
 
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
+
+from vindula.content.content.vindulanews import VindulaNews, VindulaNews_schema
 
 from vindula.services import MessageFactory as _
 from vindula.services.config import PROJECTNAME
@@ -31,7 +34,8 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
             label=_(u"Unidade Organizacional"),
             description=_(u"Selecione uma Unidade Organizacional."),
             ),
-        required=False
+        required=True,
+        validators = ('isNewStructure',),
     ),
 
     atapi.TextField('link',
@@ -172,5 +176,43 @@ class Servico(VindulaNews):
     schema = ServicoSchema
 
     _at_rename_after_creation = True
-
+    
 atapi.registerType(Servico, PROJECTNAME)
+
+@grok.subscribe(IServico, IObjectEditedEvent)
+def object_edited(context, event):
+    structure = context.getStructures()
+    if structure:
+        acl_users = getToolByName(context, 'acl_users')
+        group_list = acl_users.source_groups.getGroups()
+        structure_title = structure.Title()
+        
+        for group in group_list:
+            if group is None:
+                continue
+            group_title = group.title or group.getProperty('title')
+            if not group_title:
+                continue
+            if structure_title in group_title:
+                context.manage_addLocalRoles(group.getName(), ['Reader',])
+    context.reindexObject()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

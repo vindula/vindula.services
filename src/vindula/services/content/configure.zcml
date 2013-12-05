@@ -9,6 +9,13 @@
         interface="..interfaces.IServicosFolder"
         />
   </class>
+  
+  <class class=".servicoscategory.ServicosCategory">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.IServicosCategory"
+        />
+  </class>
 
   <class class=".servico.Servico">
     <require
