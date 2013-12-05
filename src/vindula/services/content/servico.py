@@ -193,7 +193,7 @@ def object_edited(context, event):
             group_title = group.title or group.getProperty('title')
             if not group_title:
                 continue
-            if structure_title in group_title:
+            if structure_title.lower() in group_title.lower():
                 context.manage_addLocalRoles(group.getName(), ['Reader',])
     context.reindexObject()
     
