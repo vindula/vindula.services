@@ -30,6 +30,15 @@ ServicosCategorySchema = ATFolderSchema.copy() + atapi.Schema((
             description='Imagem que vai aparecer ao lado da listagem de categorias.')
     ),
 
+    atapi.BooleanField('is_open_aba',
+        widget=atapi.BooleanWidget(
+            label=_(u'Fechado/Aberto'),
+            description=_(u'Marque essa flag para que a categoria do Serviço venha aberta.')
+        ),
+        required=False,
+    ),
+
+
 ))
 
 
