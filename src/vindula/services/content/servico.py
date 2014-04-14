@@ -74,6 +74,16 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
         ),
         required=False,
     ),
+                                                          
+    atapi.IntegerField(
+        name='height_iframe',
+        widget=atapi.IntegerWidget(
+            label=_(u"Altura do iframe"),
+            description=_(u"Tamanho em pixels do iframe.<br />Só será utilizado caso a opção Imersão estiver ativa."),
+        ),
+        default=600,
+        required=True,
+    ),
 
     atapi.BooleanField(
         name='activ_portletRight',
@@ -104,7 +114,7 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
         ),
         required=False,
     ),
-    
+                                                          
     #Schemata das opçoes do accordion
     
     atapi.BooleanField(

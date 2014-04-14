@@ -115,7 +115,8 @@
                             <div tal:condition="imersao">
                                 <tal:rep repeat="link python: context.getLinkDataGrid()">
                                     <div class="columns large-12">
-                                        <tal:cond condition="link">
+                                        <tal:cond condition="link"
+                                                  tal:define="height python: '%spx' % context.getHeight_iframe() or 600">
                                             <strong tal:condition="link/title|nothing"><span tal:replace="link/title|string:Link">Link</span>:</strong>
                                             <iframe name="service"
                                                     id="service"
