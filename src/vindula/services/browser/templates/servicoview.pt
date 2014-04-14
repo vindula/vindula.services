@@ -116,17 +116,17 @@
                                 <tal:rep repeat="link python: context.getLinkDataGrid()">
                                     <div class="columns large-12">
                                         <tal:cond condition="link"
-                                                  tal:define="height python: '%spx' % context.getHeight_iframe() or 600">
+                                                  tal:define="height context/getHeight_iframe|python:600">
                                             <strong tal:condition="link/title|nothing"><span tal:replace="link/title|string:Link">Link</span>:</strong>
                                             <iframe name="service"
                                                     id="service"
                                                     marginwidth="0"
                                                     marginheight="0"
                                                     width="100%"
-                                                    height="600px"
                                                     frameborder="0"
                                                     src="link"
-                                                    tal:attributes="src python:parametri and view.setUrlParams(link.get('link'), parametri) or link.get('link');"></iframe>
+                                                    tal:attributes="src python:parametri and view.setUrlParams(link.get('link'), parametri) or link.get('link');
+                                                                    height string:${height}px"></iframe>
                                             <br/>
                                         </tal:cond>
                                     </div>
