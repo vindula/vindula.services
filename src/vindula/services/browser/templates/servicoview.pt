@@ -105,9 +105,15 @@
                                     <!-- Social Macros -->
                                     <div class="columns large-4 social-box"
                                          tal:attributes="class python: 'columns large-%s body' % (has_acessory and '4' or '3') ">
-                                             
-                                        <div metal:use-macro="context/macro-comboStandard-content/macros/view" />
-                                        <div metal:use-macro="context/macro-rating-content/macros/view" />
+                                        
+                                        <tal:cond condition="not:context/getHide_social_bar|nothing" > 
+                                            <div metal:use-macro="context/macro-comboStandard-content/macros/view" />
+                                        </tal:cond>
+                                            
+                                        <tal:cond condition="not:context/getHide_rating|nothing">
+                                            <div metal:use-macro="context/macro-rating-content/macros/view" />
+                                        </tal:cond>
+                                        
                                     </div>
                                 </div>
                             </div>
