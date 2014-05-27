@@ -74,6 +74,16 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
         ),
         required=False,
     ),
+                                                          
+    atapi.IntegerField(
+        name='height_iframe',
+        widget=atapi.IntegerWidget(
+            label=_(u"Altura do iframe"),
+            description=_(u"Tamanho em pixels do iframe.<br />Só será utilizado caso a opção Imersão estiver ativa."),
+        ),
+        default=600,
+        required=True,
+    ),
 
     atapi.BooleanField(
         name='activ_portletRight',
@@ -104,9 +114,40 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
         ),
         required=False,
     ),
-    
-    #Schemata das opçoes do accordion
-    
+                                                          
+    atapi.BooleanField(
+        name='hide_service',
+        default=False,
+        widget=atapi.BooleanWidget(
+            label=_(u'Ocultar serviço'),
+            description=_(u'Oculta o serviço da listagem do bloco de serviços.'),
+        ),
+        required=False,
+        schemata='settings'
+    ),
+                                                          
+    atapi.BooleanField(
+        name='hide_rating',
+        default=False,
+        widget=atapi.BooleanWidget(
+            label=_(u'Ocultar avaliação'),
+            description=_(u'Oculta a opção de avaliar o serviço.'),
+        ),
+        required=False,
+        schemata='settings'
+    ),
+                                                          
+    atapi.BooleanField(
+        name='hide_social_bar',
+        default=False,
+        widget=atapi.BooleanWidget(
+            label=_(u'Ocultar barra social'),
+            description=_(u'Oculta a barra social.'),
+        ),
+        required=False,
+        schemata='settings'
+    ),
+                                                          
     atapi.BooleanField(
         name='show_properties',
         default=True,

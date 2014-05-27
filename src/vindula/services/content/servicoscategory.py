@@ -31,13 +31,23 @@ ServicosCategorySchema = ATFolderSchema.copy() + atapi.Schema((
     ),
 
     atapi.BooleanField('is_open_aba',
+        default=False,
         widget=atapi.BooleanWidget(
             label=_(u'Aberto'),
             description=_(u'Marque essa flag para que a categoria do Serviço venha aberta.')
         ),
         required=False,
     ),
-
+    
+    
+    atapi.BooleanField('sort_position_in_parent',
+        default=False,
+        widget=atapi.BooleanWidget(
+            label=_(u'Ordernar itens pela disposição na pasta'),
+            description=_(u'A listagem dos itens será feita pela ordem que estão dispostos na pasta.')
+        ),
+        required=False,
+    ),
 
 ))
 
