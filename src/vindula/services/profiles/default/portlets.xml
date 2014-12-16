@@ -4,12 +4,12 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="plone">
 
-    <portlet
+    <!--portlet
         addview="vindula.services.PortletDestaques"
         title="Portlet de Destaques Serviços"
         description="Portlet de Destaques Serviços">
 
-    </portlet>
+    </portlet-->
 
 
 </portlets>
