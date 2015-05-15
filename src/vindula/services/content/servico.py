@@ -1,26 +1,19 @@
 # -*- coding: utf-8 -*-
-from five import grok
-
-from ComputedAttribute import ComputedAttribute
-from Acquisition import aq_base
-
-from zope.interface import implements
-
-from Products.Archetypes import atapi
 from Products.ATContentTypes.content import schemata
+from Products.Archetypes import atapi
+from Products.Archetypes.interfaces import IObjectEditedEvent
 from Products.CMFCore.utils import getToolByName
-from Products.Archetypes.interfaces import IObjectEditedEvent, IObjectInitializedEvent
-
 from Products.DataGridField import DataGridField, DataGridWidget
 from Products.DataGridField.Column import Column
-
+from five import grok
 from vindula.content.content.vindulanews import VindulaNews, VindulaNews_schema
+from vindula.controlpanel.browser.at.widget import VindulaReferenceSelectionWidget
+from zope.interface import implements
 
 from vindula.services import MessageFactory as _
 from vindula.services.config import PROJECTNAME
 from vindula.services.interfaces import IServico
 
-from vindula.controlpanel.browser.at.widget import VindulaReferenceSelectionWidget
 
 ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
 
@@ -38,13 +31,13 @@ ServicoSchema = VindulaNews_schema.copy() + atapi.Schema((
         validators = ('isNewStructure',),
     ),
 
-    atapi.TextField('link',
-        widget=atapi.TextAreaWidget(
-            label=_(u'Link'),
-            description=_(u'Informe o link para o serviço (campo antigo, está aqui somente até migração para o novo formato).')
-        ),
-        required=False,
-    ),
+    # atapi.TextField('link',
+    #     widget=atapi.TextAreaWidget(
+    #         label=_(u'Link'),
+    #         description=_(u'Informe o link para o serviço (campo antigo, está aqui somente até migração para o novo formato).')
+    #     ),
+    #     required=False,
+    # ),
     
     DataGridField('linkDataGrid',
         columns=('title','link',),
